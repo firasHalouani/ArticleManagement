@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Articles{% endblock %}
+
+{% block body %}
+<section class="articles">
+    {% for article in articles %}
+    <article>
+        <h2>{{ article.title }}</h2>
+        <div class="metadata">Édité le {{ article.createdAt|date("d/m/Y à H:i") }}</div>
+        <div class="content">
+            <img src="{{ article.image }}" alt="" style="max-width: 100%;">
+            <p>{{ article.content|raw }}</p>
+        </div>
+        <a href="{{ path('blog_show', {id: article.id}) }}" class="btn btn-primary">Lire la suite</a>
+        <a href="{{ path('edit_article', {id: article.id}) }}" class="btn btn-warning">Modifier</a>
+        <a href="{{ path('delete_article', {id: article.id}) }}" class="btn btn-danger">Supprimer</a>
+    </article>
+    {% endfor %}
+</section>
+{% endblock %}
